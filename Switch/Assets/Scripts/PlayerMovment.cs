@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class PlayerMovment : MonoBehaviour
 {
+    [Header("player movment")]
     public float Speed;
     public float rotationSpeed;
-
+    [SerializeField] List<GameObject> charecters;
     private Animator animator;
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -23,17 +25,24 @@ public class PlayerMovment : MonoBehaviour
 
         transform.Translate(movementDirection * Speed * Time.deltaTime, Space.World);
 
-        if (movementDirection != Vector3.zero)
-        {
-            animator.SetBool("IsMoving", true);
-            Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
+        //foreach (GameObject player in charecters)
+        //{
 
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
-        }
+            if (movementDirection != Vector3.zero)
+            {
+                animator.SetBool("IsMoving", true);
+                Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
 
-        else
-        {
-            animator.SetBool("IsMoving", false);
-        }
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+            }
+
+            else
+            {
+                animator.SetBool("IsMoving", false);
+            }
+       // }
+
+         
+              
     }
 }

@@ -16,15 +16,18 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
         healthbar.SetMaxHealth(maxHealth);
+        
     }
 
-    
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) //Will be changed with onCollision when enemies will be in place
-        {
-            TakeDamage();
-            Death();
+        void OnCollisionEnter(Collision col)
+         {
+            if (col.gameObject.CompareTag("Enemy") && CompareTag("Odin, Horus"))
+            {
+                TakeDamage();
+                Death();
+            }
         }
 
         void TakeDamage()
@@ -45,6 +48,7 @@ public class PlayerHealth : MonoBehaviour
                 Debug.Log("Carry on");
             }
         }
-
     }
+   
 }
+
