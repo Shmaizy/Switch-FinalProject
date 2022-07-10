@@ -9,46 +9,67 @@ public class PlayerHealth : MonoBehaviour
     public int maxHealth;
     public int currentHealth;
     public int damage;
+    public KeyControl script;
+   
+    private Animator animator;
 
     public HealthController healthbar;
-    
-    void Awake ()
+
+    void Awake()
     {
+        animator = GetComponent<Animator>();
         currentHealth = maxHealth;
         healthbar.SetMaxHealth(maxHealth);
-        
-    }
 
-    void Update()
+    }
+    void OnTriggerEnter(Collider col)
     {
-        void OnCollisionEnter(Collision col)
-         {
-            if (col.gameObject.CompareTag("Enemy") && CompareTag("Odin, Horus"))
-            {
-                TakeDamage();
-                Death();
-            }
-        }
-
-        void TakeDamage()
+        if (col.gameObject.CompareTag("Enemy"))
         {
-            currentHealth = currentHealth - damage;
-            healthbar.SetHealth(currentHealth);
-        }
-
-        void Death()
-        {
-            if (currentHealth == 0)
+            switch(script.Chara)
             {
-                Debug.Log("You Died");
-            }
+                case 0:
+                    TakeDamage();
+                    break;
 
-            else
-            {
-                Debug.Log("Carry on");
+                case 1:
+                    //no damage for now
+                    break;
+
+                case 2:
+                    TakeDamage();
+                    break;
             }
         }
     }
-   
+    void TakeDamage()
+    {
+        currentHealth = currentHealth - damage;
+        healthbar.SetHealth(currentHealth);
+        Death();
+    }
+
+    void Death()
+    {
+        if (currentHealth == 0)
+        {
+            animator.SetBool("IsDead", true);
+            Debug.Log("You Died");
+           //GetComponent<Rigidbody>().isKinematic = false;
+
+
+        }
+
+        else
+        {
+
+            animator.SetBool("IsDead", false);
+            Debug.Log(currentHealth);
+            //GetComponent<Rigidbody>().isKinematic = true;
+
+        }
+    }
+
+
 }
 
