@@ -10,7 +10,8 @@ public class PlayerHealth : MonoBehaviour
     public int currentHealth;
     public int damage;
     public KeyControl script;
-   
+    public bool isAlive => currentHealth > 0; //lamda expresion
+
     private Animator animator;
 
     public HealthController healthbar;
@@ -44,28 +45,27 @@ public class PlayerHealth : MonoBehaviour
     }
     void TakeDamage()
     {
-        currentHealth = currentHealth - damage;
-        healthbar.SetHealth(currentHealth);
-        Death();
+        if(currentHealth>0)
+        {
+            currentHealth = currentHealth - damage;
+            healthbar.SetHealth(currentHealth);
+            Death();
+        }
+
     }
 
     void Death()
     {
-        if (currentHealth == 0)
+        if (currentHealth == 0 && animator.GetBool ("IsDead")== false)
         {
             animator.SetBool("IsDead", true);
             Debug.Log("You Died");
-           //GetComponent<Rigidbody>().isKinematic = false;
-
-
         }
 
         else
         {
-
             animator.SetBool("IsDead", false);
             Debug.Log(currentHealth);
-            //GetComponent<Rigidbody>().isKinematic = true;
 
         }
     }

@@ -478,6 +478,7 @@ MonoBehaviour:
   Speed: 5
   rotationSpeed: 720
   script: {fileID: 658404108}
+  playerHealth: {fileID: 658404111}
   odinAnim: {fileID: 9100000, guid: ef1acb6e861833e43b7936146a3af473, type: 2}
   aresAnim: {fileID: 9100000, guid: 06e89005b5b6b5945b321755b84e151d, type: 2}
   horusAnim: {fileID: 9100000, guid: 422a6744402b8ed4781ca4fb840b2edd, type: 2}
@@ -693,7 +694,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ac8bba186c139a84c8541ec06426754c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ac8bba186c139a84c8541ec06426754c, type: 3}
       propertyPath: m_TagString
@@ -780,7 +781,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e6ba826ec53eaa74798ff9df763b3191, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: e6ba826ec53eaa74798ff9df763b3191, type: 3}
       propertyPath: m_TagString
@@ -2297,7 +2298,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -2316,21 +2317,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5195613, y: 0.829247, z: 0.4750538}
-  m_Center: {x: -0.008322954, y: 0.6595986, z: 0.0024518967}
---- !u!65 &2051278191
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2051278186}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.46450806, y: 0.8866837, z: 1}
-  m_Center: {x: -0.010755062, y: 0.68006027, z: 0}
+  m_Size: {x: 0.7847581, y: 0.829247, z: 0.6945362}
+  m_Center: {x: -0.0343225, y: 0.6595986, z: 0.0020132065}
 --- !u!1 &96646646364615782
 GameObject:
   m_ObjectHideFlags: 0
