@@ -39,31 +39,42 @@ public class KeyControl : MonoBehaviour
             {
                 case 0:
                     Debug.Log("I'M ARES");
-                    animator.Play("Attack");
+                    animator.SetBool("IsAttecking", true);
                     break;
 
                 case 1:
                     Debug.Log("I'M ODIN");
-                    animator.Play("Block");
-                    
+                    animator.SetBool("IsBlocking", true);
+
                     break;
 
                 case 2:
                     Debug.Log("I'M HORUS");
-                    animator.Play("Heal");
+                    animator.SetBool("IsHealing", true);
                     break;
             }
-
         }
 
         else if (Input.GetKeyUp(KeyCode.Space))
         {
-            // animator.Stop("Attack");
+            switch(Chara)
+            {
+                case 0:
+                    Debug.Log("I'M ARES");
+                    animator.SetBool("IsAttecking", false);
+                    break;
+
+                case 1:
+                    Debug.Log("I'M ODIN");
+                    animator.SetBool("IsBlocking", false);
+                    break;
+
+                case 2:
+                    Debug.Log("I'M HORUS");
+                    animator.SetBool("IsHealing", false);
+                    break;
+            }
         }
-
-
-
-
     }
 
     void DisableOtherCharecters (int whatToActive)

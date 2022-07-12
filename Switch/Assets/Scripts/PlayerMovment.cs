@@ -10,8 +10,6 @@ public class PlayerMovment : MonoBehaviour
     public KeyControl script;
     public PlayerHealth playerHealth;
 
-
-
     private Animator animator;
     public RuntimeAnimatorController odinAnim;
     public RuntimeAnimatorController aresAnim;
@@ -24,25 +22,25 @@ public class PlayerMovment : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-
     }
 
     void Update()
     {
        
-            float horizontalInput = Input.GetAxis("Horizontal");
-            float VerticalInput = Input.GetAxis("Vertical");
+         float horizontalInput = Input.GetAxis("Horizontal");
+         float VerticalInput = Input.GetAxis("Vertical");
 
-            Vector3 movementDirection = new Vector3(horizontalInput, 0, VerticalInput);
-            movementDirection.Normalize();
+         Vector3 movementDirection = new Vector3(horizontalInput, 0, VerticalInput);
+          movementDirection.Normalize();
 
-        if (playerHealth.isAlive)
+        if (playerHealth.isAlive &!Input.GetKey(KeyCode.Space))
         {
-            transform.Translate(movementDirection * Speed * Time.deltaTime, Space.World);
-
+            transform.Translate(movementDirection * Speed * Time.deltaTime, Space.World); //applies on transform
         }
 
-            switch (script.Chara)
+
+
+        switch (script.Chara)
             {
                 case 0:
                     animator.runtimeAnimatorController = aresAnim;
@@ -65,10 +63,10 @@ public class PlayerMovment : MonoBehaviour
                 animator.SetBool("IsMoving", true);
                 Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
 
-            if (playerHealth.isAlive)
-            {
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
-            }
+              if (playerHealth.isAlive &!Input.GetKey(KeyCode.Space))
+              {
+                 transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime); //applies on rotation
+              }
                 
             }
 
