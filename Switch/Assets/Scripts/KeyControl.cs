@@ -10,9 +10,10 @@ public class KeyControl : MonoBehaviour
     public int Chara;
 
     private Animator animator;
-
+    public PlayerHealth PlayerHealth;
     private void Start()
     {
+        PlayerHealth = GetComponent<PlayerHealth>();
         animator = GetComponent<Animator>();
     }
     void Update()
@@ -20,20 +21,19 @@ public class KeyControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode .Q))
         {
             DisableOtherCharecters(0);
-        }
+        } //Switchg machenic
 
         if (Input.GetKeyDown(KeyCode.W))
         {
             DisableOtherCharecters(1);
-        }
+        } //Switchg machenic
 
         if (Input.GetKeyDown(KeyCode.E))
         {
             DisableOtherCharecters(2);
-        }
+        } //Switchg machenic
 
-
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space)) //Special abbility machenic
         {
             switch(Chara)
             {
@@ -45,23 +45,24 @@ public class KeyControl : MonoBehaviour
                 case 1:
                     Debug.Log("I'M ODIN");
                     animator.SetBool("IsBlocking", true);
-
                     break;
 
                 case 2:
                     Debug.Log("I'M HORUS");
                     animator.SetBool("IsHealing", true);
+                    PlayerHealth.Healing();
                     break;
             }
         }
 
-        else if (Input.GetKeyUp(KeyCode.Space))
+        else if (Input.GetKeyUp(KeyCode.Space)) //End of special abbility machenic
         {
             switch(Chara)
             {
                 case 0:
                     Debug.Log("I'M ARES");
                     animator.SetBool("IsAttecking", false);
+
                     break;
 
                 case 1:
@@ -72,6 +73,7 @@ public class KeyControl : MonoBehaviour
                 case 2:
                     Debug.Log("I'M HORUS");
                     animator.SetBool("IsHealing", false);
+
                     break;
             }
         }

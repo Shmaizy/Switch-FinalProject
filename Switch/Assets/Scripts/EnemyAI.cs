@@ -21,7 +21,7 @@ public class EnemyAI : MonoBehaviour
 
     private void Update()
     {
-        Distance = Vector3.Distance(Player.transform.position, this.transform.position);
+        Distance = Vector3.Distance(Player.transform.position, this.transform.position); //Navemash distans and angered setting
 
         if(Distance <= 6)
         {
@@ -45,7 +45,20 @@ public class EnemyAI : MonoBehaviour
             animator.SetBool("IsMoving", false);
             _agent.isStopped = true;
         }
-    }
 
+    }
+    void OnTriggerEnter(Collider col) //zombie attack machenics
+    {
+        if (col.gameObject.CompareTag("Player") && Distance < 1)
+        {
+            animator.SetBool("IsAttecking", true);
+        }
+
+        else if (Distance > 1)
+        {
+            animator.SetBool("IsMoving", true);
+            animator.SetBool("IsAttecking", false);
+        }
+    }
 
 }

@@ -26,21 +26,21 @@ public class PlayerMovment : MonoBehaviour
 
     void Update()
     {
-       
          float horizontalInput = Input.GetAxis("Horizontal");
          float VerticalInput = Input.GetAxis("Vertical");
 
          Vector3 movementDirection = new Vector3(horizontalInput, 0, VerticalInput);
           movementDirection.Normalize();
 
+        //applies on transform
         if (playerHealth.isAlive &!Input.GetKey(KeyCode.Space))
         {
-            transform.Translate(movementDirection * Speed * Time.deltaTime, Space.World); //applies on transform
+            transform.Translate(movementDirection * Speed * Time.deltaTime, Space.World); 
         }
 
 
-
-        switch (script.Chara)
+        //Avatar and animator settings
+        switch (script.Chara) 
             {
                 case 0:
                     animator.runtimeAnimatorController = aresAnim;
@@ -58,14 +58,15 @@ public class PlayerMovment : MonoBehaviour
                     break;
             }
 
-            if (movementDirection != Vector3.zero)
+            //applies on rotation
+            if (movementDirection != Vector3.zero) 
             {
                 animator.SetBool("IsMoving", true);
                 Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
 
               if (playerHealth.isAlive &!Input.GetKey(KeyCode.Space))
               {
-                 transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime); //applies on rotation
+                 transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime); 
               }
                 
             }

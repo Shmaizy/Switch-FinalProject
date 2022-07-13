@@ -8,7 +8,10 @@ public class PlayerHealth : MonoBehaviour
 
     public int maxHealth;
     public int currentHealth;
+
     public int damage;
+    public int heal;
+
     public KeyControl script;
     public bool isAlive => currentHealth > 0; //lamda expresion
 
@@ -25,7 +28,7 @@ public class PlayerHealth : MonoBehaviour
     }
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.CompareTag("Enemy"))
+        if (col.gameObject.CompareTag("Enemy")) //Player takes damage on collision
         {
             switch(script.Chara)
             {
@@ -33,8 +36,11 @@ public class PlayerHealth : MonoBehaviour
                     TakeDamage();
                     break;
 
-                case 1:
-                    //no damage for now
+                case 1: 
+                    if (!Input.GetKeyDown(KeyCode.Space))
+                    {
+                        TakeDamage();
+                    }
                     break;
 
                 case 2:
@@ -45,13 +51,12 @@ public class PlayerHealth : MonoBehaviour
     }
     void TakeDamage()
     {
-        if(currentHealth>0)
+        if(currentHealth > 0)
         {
             currentHealth = currentHealth - damage;
             healthbar.SetHealth(currentHealth);
             Death();
         }
-
     }
 
     void Death()
@@ -70,6 +75,11 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-
+    public void Healing()
+    {
+        Debug.Log("Extra Health");
+        currentHealth = currentHealth + heal;
+        healthbar.SetHealth(currentHealth);
+    }
 }
 
