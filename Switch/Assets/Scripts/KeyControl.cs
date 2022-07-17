@@ -34,7 +34,7 @@ public class KeyControl : MonoBehaviour
             DisableOtherCharecters(2);
         } //Switchg machenic
 
-        if (Input.GetKeyDown(KeyCode.Space)) //Special abbility machenic
+        if (Input.GetKey(KeyCode.Space)) //Special abbility machenic
         {
             switch(Chara)
             {
@@ -52,22 +52,22 @@ public class KeyControl : MonoBehaviour
             }
         }
 
-        else if (Input.GetKeyUp(KeyCode.Space)) //End of special abbility machenic
+        else //End of special abbility machenic
         {
             switch(Chara)
             {
                 case 0:
                     animator.SetBool("IsAttecking", false);
-
+        
                     break;
-
+        
                 case 1:
                     animator.SetBool("IsBlocking", false);
                     break;
-
+        
                 case 2:
                     animator.SetBool("IsHealing", false);
-
+        
                     break;
             }
         }
