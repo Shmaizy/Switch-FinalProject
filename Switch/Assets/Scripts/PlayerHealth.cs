@@ -78,8 +78,10 @@ public class PlayerHealth : MonoBehaviour
     public void Healing()
     {
         Debug.Log("Extra Health");
+        animator.SetBool("IsHealing", true);
         currentHealth = currentHealth + heal;
         healthbar.SetHealth(currentHealth);
+
     }
 }
 

@@ -11,6 +11,7 @@ public class KeyControl : MonoBehaviour
 
     private Animator animator;
     public PlayerHealth PlayerHealth;
+    public PlayerCombat PlayerCombat;
     private void Start()
     {
         PlayerHealth = GetComponent<PlayerHealth>();
@@ -38,18 +39,14 @@ public class KeyControl : MonoBehaviour
             switch(Chara)
             {
                 case 0:
-                    Debug.Log("I'M ARES");
-                    animator.SetBool("IsAttecking", true);
+                    PlayerCombat.Attack();
                     break;
 
                 case 1:
-                    Debug.Log("I'M ODIN");
                     animator.SetBool("IsBlocking", true);
                     break;
 
                 case 2:
-                    Debug.Log("I'M HORUS");
-                    animator.SetBool("IsHealing", true);
                     PlayerHealth.Healing();
                     break;
             }
@@ -60,18 +57,15 @@ public class KeyControl : MonoBehaviour
             switch(Chara)
             {
                 case 0:
-                    Debug.Log("I'M ARES");
                     animator.SetBool("IsAttecking", false);
 
                     break;
 
                 case 1:
-                    Debug.Log("I'M ODIN");
                     animator.SetBool("IsBlocking", false);
                     break;
 
                 case 2:
-                    Debug.Log("I'M HORUS");
                     animator.SetBool("IsHealing", false);
 
                     break;
@@ -95,4 +89,5 @@ public class KeyControl : MonoBehaviour
             }
         }  
     }
+
 }

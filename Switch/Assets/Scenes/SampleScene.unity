@@ -389,10 +389,11 @@ GameObject:
   - component: {fileID: 658404106}
   - component: {fileID: 658404109}
   - component: {fileID: 658404107}
+  - component: {fileID: 658404112}
   - component: {fileID: 658404108}
   - component: {fileID: 658404111}
   - component: {fileID: 658404110}
-  - component: {fileID: 658404112}
+  - component: {fileID: 658404113}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -448,6 +449,7 @@ MonoBehaviour:
   - {fileID: 828958317}
   Chara: 0
   PlayerHealth: {fileID: 658404111}
+  PlayerCombat: {fileID: 658404113}
 --- !u!54 &658404109
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -523,6 +525,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &658404113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 658404105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c12eb6ad46ef73348a253192e46d70ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackPoint: {fileID: 822556436}
+  attackRange: 0.94
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!95 &694176981
 Animator:
   serializedVersion: 3
@@ -722,6 +741,36 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ac8bba186c139a84c8541ec06426754c, type: 3}
   m_PrefabInstance: {fileID: 760366058}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &822556435
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 822556436}
+  m_Layer: 0
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &822556436
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822556435}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.6, z: 1.12}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 760366059}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &828958315
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1272,6 +1321,10 @@ PrefabInstance:
     - target: {fileID: 1391888216552696, guid: 0c74bed2ad49fad4d94fca86441ad49f, type: 3}
       propertyPath: m_Name
       value: Zombie
+      objectReference: {fileID: 0}
+    - target: {fileID: 1391888216552696, guid: 0c74bed2ad49fad4d94fca86441ad49f, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1391888216552696, guid: 0c74bed2ad49fad4d94fca86441ad49f, type: 3}
       propertyPath: m_TagString
@@ -2274,6 +2327,7 @@ MonoBehaviour:
   Distance: 0
   isAngered: 0
   _agent: {fileID: 2051278189}
+  maxHealth: 100
 --- !u!54 &2051278188
 Rigidbody:
   m_ObjectHideFlags: 0
