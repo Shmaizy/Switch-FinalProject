@@ -12,9 +12,13 @@ public class KeyControl : MonoBehaviour
     private Animator animator;
     public PlayerHealth PlayerHealth;
     public PlayerCombat PlayerCombat;
+    public PlayerMana PlayerMana;
+
     private void Start()
     {
         PlayerHealth = GetComponent<PlayerHealth>();
+        PlayerCombat = GetComponent<PlayerCombat>();
+        PlayerMana = GetComponent<PlayerMana>();
         animator = GetComponent<Animator>();
     }
     void Update()
@@ -33,13 +37,16 @@ public class KeyControl : MonoBehaviour
         {
             DisableOtherCharecters(2);
         } //Switchg machenic
-
-        if (Input.GetKey(KeyCode.Space)) //Special abbility machenic
+        
+        if (Input.GetKeyDown(KeyCode.Space)) //Special abbility machenic
         {
             switch(Chara)
             {
                 case 0:
+                    animator.SetBool("IsAttecking", true);
                     PlayerCombat.Attack();
+                    StartCoroutine(AnimationEvents.instance.AnimationEndPoint("IsAttecking", false , "Sword And Shield Attack"));
+                    
                     break;
 
                 case 1:
@@ -47,27 +54,10 @@ public class KeyControl : MonoBehaviour
                     break;
 
                 case 2:
+                    animator.SetBool("IsHealing", true);
+                    PlayerMana.ReduceMana(10);
                     PlayerHealth.Healing();
-                    break;
-            }
-        }
-
-        else //End of special abbility machenic
-        {
-            switch(Chara)
-            {
-                case 0:
-                    animator.SetBool("IsAttecking", false);
-        
-                    break;
-        
-                case 1:
-                    animator.SetBool("IsBlocking", false);
-                    break;
-        
-                case 2:
-                    animator.SetBool("IsHealing", false);
-        
+                    StartCoroutine(AnimationEvents.instance.AnimationEndPoint("IsHealing", false, "Healing"));
                     break;
             }
         }

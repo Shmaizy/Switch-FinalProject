@@ -65,11 +65,10 @@ public class PlayerMovment : MonoBehaviour
                 Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
 
             //don't move when special abillity is on
-              if (playerHealth.isAlive &!Input.GetKey(KeyCode.Space))
+              if (playerHealth.isAlive &!Input.GetKeyDown(KeyCode.Space))
               {
                  transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime); 
-              }
-                
+              }  
             }
 
             else

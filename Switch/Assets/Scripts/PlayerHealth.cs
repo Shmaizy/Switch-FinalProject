@@ -18,10 +18,12 @@ public class PlayerHealth : MonoBehaviour
     private Animator animator;
 
     public HealthController healthbar;
+    public PlayerMana PlayerMana;
 
     void Awake()
     {
         animator = GetComponent<Animator>();
+        PlayerMana = GetComponent<PlayerMana>();
         currentHealth = maxHealth;
         healthbar.SetMaxHealth(maxHealth);
 
@@ -77,10 +79,21 @@ public class PlayerHealth : MonoBehaviour
 
     public void Healing()
     {
-        Debug.Log("Extra Health");
-        animator.SetBool("IsHealing", true);
-        currentHealth = currentHealth + heal;
-        healthbar.SetHealth(currentHealth);
+        if(PlayerMana.currentMana > 0)
+        {
+
+            Debug.Log("Extra Health");
+            currentHealth = currentHealth + heal;
+            healthbar.SetHealth(currentHealth);
+        }
+
+        else
+        {
+
+            Debug.Log("No Mana");
+        }
+        
+
 
     }
 }

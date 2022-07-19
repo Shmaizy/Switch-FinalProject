@@ -9,16 +9,11 @@ public class PlayerCombat : MonoBehaviour
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
 
-    void Start()
-    {
-        animator = GetComponent<Animator>();
-    }
 
     public void Attack()
     {
-        //player animation
-        animator.SetBool("IsAttecking", true);
-
+        //play animation
+        
         //detects enemies in range of attack
         Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers); //creates a circle that will be the range of our attack
 
@@ -27,7 +22,6 @@ public class PlayerCombat : MonoBehaviour
         {
             enemy.GetComponent<EnemyAI>().TakeDamage(50);
         }
-
     }
 
     private void OnDrawGizmosSelected() //draw gizmos that are also pickable and always drawn. This allows  to quickly pick important objects in your Scene
