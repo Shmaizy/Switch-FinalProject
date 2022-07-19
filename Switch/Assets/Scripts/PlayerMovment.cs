@@ -29,7 +29,7 @@ public class PlayerMovment : MonoBehaviour
          float horizontalInput = Input.GetAxis("Horizontal");
          float VerticalInput = Input.GetAxis("Vertical");
 
-         Vector3 movementDirection = new Vector3(horizontalInput, 0, VerticalInput);
+         Vector3 movementDirection = new Vector3(VerticalInput, 0, -horizontalInput);
           movementDirection.Normalize();
 
         //applies on transform
