@@ -55,7 +55,7 @@ public class KeyControl : MonoBehaviour
 
                 case 2:
                     animator.SetBool("IsHealing", true);
-                    PlayerMana.ReduceMana(10);
+                    PlayerMana.ReduceMana();
                     PlayerHealth.Healing();
                     StartCoroutine(AnimationEvents.instance.AnimationEndPoint("IsHealing", false, "Healing"));
                     break;

@@ -89,12 +89,11 @@ public class PlayerHealth : MonoBehaviour
 
         else
         {
-
             Debug.Log("No Mana");
         }
-        
-
+       
 
     }
+
 }
 

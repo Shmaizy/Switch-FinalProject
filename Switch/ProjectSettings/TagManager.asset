@@ -8,6 +8,8 @@ TagManager:
   - Odin
   - Ares
   - Horus
+  - Mana Potion
+  - Prize
   layers:
   - Default
   - TransparentFX

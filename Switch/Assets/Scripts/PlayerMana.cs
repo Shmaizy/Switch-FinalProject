@@ -6,6 +6,7 @@ public class PlayerMana : MonoBehaviour
 {
     public int maxMana = 30;
     public int currentMana;
+    int mana = 10;
 
     public ManaController manaBar;
     public void Start()
@@ -14,7 +15,7 @@ public class PlayerMana : MonoBehaviour
         manaBar.SetMaxMana(maxMana);
     }
 
-    public void ReduceMana (int mana)
+    public void ReduceMana ()
     {
         if (currentMana > 0)
         {
@@ -24,6 +25,18 @@ public class PlayerMana : MonoBehaviour
         }
 
     }
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.CompareTag("Mana Potion") && currentMana < 30)
+        {
+            currentMana = currentMana + mana;
+            manaBar.SetMana(currentMana);
+            Destroy(col.gameObject);
+            Debug.Log(currentMana);
+        }
+    }
+
 
 
 }

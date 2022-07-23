@@ -10,6 +10,7 @@ public class PlayerMovment : MonoBehaviour
     public KeyControl script;
     public PlayerHealth playerHealth;
 
+    [Header("Animation properties")]
     private Animator animator;
     public RuntimeAnimatorController odinAnim;
     public RuntimeAnimatorController aresAnim;
@@ -26,57 +27,62 @@ public class PlayerMovment : MonoBehaviour
 
     void Update()
     {
-         float horizontalInput = Input.GetAxis("Horizontal");
-         float VerticalInput = Input.GetAxis("Vertical");
+        playerMovment();
+    }
 
-         Vector3 movementDirection = new Vector3(VerticalInput, 0, -horizontalInput);
-          movementDirection.Normalize();
+    void playerMovment()
+    {
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float VerticalInput = Input.GetAxis("Vertical");
+
+        Vector3 movementDirection = new Vector3(VerticalInput, 0, -horizontalInput);
+        movementDirection.Normalize();
 
         //applies on transform
-        if (playerHealth.isAlive &!Input.GetKey(KeyCode.Space))
+        if (playerHealth.isAlive & !Input.GetKeyDown(KeyCode.Space))
         {
-            transform.Translate(movementDirection * Speed * Time.deltaTime, Space.World); 
+            transform.Translate(movementDirection * Speed * Time.deltaTime, Space.World);
         }
 
 
         //Avatar and animator settings
-        switch (script.Chara) 
-            {
-                case 0:
-                    animator.runtimeAnimatorController = aresAnim;
-                    animator.avatar = aresAvatar;
-                    break;
+        switch (script.Chara)
+        {
+            case 0:
+                animator.runtimeAnimatorController = aresAnim;
+                animator.avatar = aresAvatar;
+                break;
 
-                case 1:
-                    animator.runtimeAnimatorController = odinAnim;
-                    animator.avatar = odinAvatar;
-                    break;
+            case 1:
+                animator.runtimeAnimatorController = odinAnim;
+                animator.avatar = odinAvatar;
+                break;
 
-                case 2:
-                    animator.runtimeAnimatorController = horusAnim;
-                    animator.avatar = horusAvatar;
-                    break;
-            }
+            case 2:
+                animator.runtimeAnimatorController = horusAnim;
+                animator.avatar = horusAvatar;
+                break;
+        }
 
-            //applies on rotation
-            if (movementDirection != Vector3.zero) 
-            {
-                animator.SetBool("IsMoving", true);
-                Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
+        //applies on rotation
+        if (movementDirection != Vector3.zero)
+        {
+            animator.SetBool("IsMoving", true);
+            Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
 
             //don't move when special abillity is on
-              if (playerHealth.isAlive &!Input.GetKeyDown(KeyCode.Space))
-              {
-                 transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime); 
-              }  
-            }
-
-            else
+            if (playerHealth.isAlive & !Input.GetKeyDown(KeyCode.Space))
             {
-                animator.SetBool("IsMoving", false);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
             }
-
         }
+
+        else
+        {
+            animator.SetBool("IsMoving", false);
+        }
+
     }
+}
 
 
