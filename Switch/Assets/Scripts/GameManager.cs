@@ -1,18 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public GameObject gameOverScreen;
+    public GameObject youWinScreen;
+    public void EndGame()
     {
-        
+        gameOverScreen.SetActive(true);
+        Debug.Log("You Died");
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void WinGame()
     {
-        
+        youWinScreen.SetActive(true);
+        Debug.Log("You Win");  
     }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void NextLevel()
+    {
+        SceneManager.LoadScene("Level Manu");
+    }
+
+
 }

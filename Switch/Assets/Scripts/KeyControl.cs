@@ -43,6 +43,7 @@ public class KeyControl : MonoBehaviour
             switch(Chara)
             {
                 case 0:
+
                     animator.SetBool("IsAttecking", true);
                     PlayerCombat.Attack();
                     StartCoroutine(AnimationEvents.instance.AnimationEndPoint("IsAttecking", false , "Sword And Shield Attack"));

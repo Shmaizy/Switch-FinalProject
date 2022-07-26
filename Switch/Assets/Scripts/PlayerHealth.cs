@@ -59,6 +59,7 @@ public class PlayerHealth : MonoBehaviour
             healthbar.SetHealth(currentHealth);
             Death();
         }
+
     }
 
     void Death()
@@ -66,7 +67,9 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth == 0 && animator.GetBool ("IsDead")== false)
         {
             animator.SetBool("IsDead", true);
-            Debug.Log("You Died");
+            FindObjectOfType<GameManager>().EndGame();
+
+
         }
 
         else

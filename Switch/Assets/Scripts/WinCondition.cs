@@ -9,7 +9,7 @@ public class WinCondition : MonoBehaviour
         if (col.gameObject.CompareTag("Prize"))
         {
             Destroy(col.gameObject);
-            Debug.Log("YouWin");
+            FindObjectOfType<GameManager>().WinGame();
         }
     }
 }
