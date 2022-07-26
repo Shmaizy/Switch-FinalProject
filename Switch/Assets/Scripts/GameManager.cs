@@ -28,12 +28,12 @@ public class GameManager : MonoBehaviour
 
     public void MainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Main Menu");
     }
 
     public void NextLevel()
     {
-        SceneManager.LoadScene("Level Manu");
+        SceneManager.LoadScene("Level Menu");
     }
 
 
