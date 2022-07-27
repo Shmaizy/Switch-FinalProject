@@ -14,6 +14,8 @@ public class KeyControl : MonoBehaviour
     public PlayerCombat PlayerCombat;
     public PlayerMana PlayerMana;
 
+    public Transform target;
+
     private void Start()
     {
         PlayerHealth = GetComponent<PlayerHealth>();
@@ -46,18 +48,20 @@ public class KeyControl : MonoBehaviour
 
                     animator.SetBool("IsAttecking", true);
                     PlayerCombat.Attack();
+                    transform.LookAt(target);
                     StartCoroutine(AnimationEvents.instance.AnimationEndPoint("IsAttecking", false , "Sword And Shield Attack"));
                     
                     break;
 
                 case 1:
                     animator.SetBool("IsBlocking", true);
+                    transform.LookAt(target);
                     break;
 
                 case 2:
                     animator.SetBool("IsHealing", true);
-                    PlayerMana.ReduceMana();
                     PlayerHealth.Healing();
+                    PlayerMana.ReduceMana();
                     StartCoroutine(AnimationEvents.instance.AnimationEndPoint("IsHealing", false, "Healing"));
                     break;
             }
@@ -80,5 +84,6 @@ public class KeyControl : MonoBehaviour
             }
         }  
     }
+
 
 }

@@ -84,17 +84,10 @@ public class PlayerHealth : MonoBehaviour
     {
         if(PlayerMana.currentMana > 0)
         {
-
             Debug.Log("Extra Health");
             currentHealth = currentHealth + heal;
             healthbar.SetHealth(currentHealth);
         }
-
-        else
-        {
-            Debug.Log("No Mana");
-        }
-       
 
     }
 
