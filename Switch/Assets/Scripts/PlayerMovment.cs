@@ -9,9 +9,11 @@ public class PlayerMovment : MonoBehaviour
     public float rotationSpeed;
     public KeyControl script;
     public PlayerHealth playerHealth;
+    Rigidbody m_Rigidbody;
+    Vector3 movementDirection;
 
-    [Header("Animation properties")]
-    private Animator animator;
+   [Header("Animation properties")]
+    [SerializeField] Animator animator;
     public RuntimeAnimatorController odinAnim;
     public RuntimeAnimatorController aresAnim;
     public RuntimeAnimatorController horusAnim;
@@ -22,12 +24,23 @@ public class PlayerMovment : MonoBehaviour
 
     void Start()
     {
-        animator = GetComponent<Animator>();
+        m_Rigidbody = GetComponent<Rigidbody>();
+        //animator = GetComponent<Animator>();
     }
 
     void Update()
     {
         playerMovment();
+       
+    }
+
+    private void FixedUpdate()
+    {
+        if (playerHealth.isAlive && animator.GetCurrentAnimatorStateInfo(0).IsName("Running"))
+        {
+            RB();
+        }
+            
     }
 
     void playerMovment()
@@ -35,15 +48,23 @@ public class PlayerMovment : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float VerticalInput = Input.GetAxis("Vertical");
 
-        Vector3 movementDirection = new Vector3(VerticalInput, 0, -horizontalInput);
+        movementDirection = new Vector3(VerticalInput, 0, -horizontalInput);
         movementDirection.Normalize();
 
-        //applies on transform
-        if (playerHealth.isAlive & !Input.GetKeyDown(KeyCode.Space))
+
+        //applies on rotation
+        if (movementDirection != Vector3.zero)
         {
-            transform.Translate(movementDirection * Speed * Time.deltaTime, Space.World);
+            animator.SetBool("IsMoving", true);
+            Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+            
         }
 
+        else
+        {
+            animator.SetBool("IsMoving", false);
+        }
 
         //Avatar and animator settings
         switch (script.Chara)
@@ -64,24 +85,14 @@ public class PlayerMovment : MonoBehaviour
                 break;
         }
 
-        //applies on rotation
-        if (movementDirection != Vector3.zero)
-        {
-            animator.SetBool("IsMoving", true);
-            Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
 
-            //don't move when special abillity is on
-            if (playerHealth.isAlive & !Input.GetKeyDown(KeyCode.Space))
-            {
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
-            }
-        }
+    }
 
-        else
-        {
-            animator.SetBool("IsMoving", false);
-        }
-
+    void RB()
+    {
+        //applies on RB
+         m_Rigidbody.MovePosition(transform.position += movementDirection * Time.deltaTime * Speed);
+        
     }
 }
 

@@ -32,10 +32,6 @@ public class AnimationEvents : MonoBehaviour
         yield return new WaitForSeconds(animationLength);
 
         animator.SetBool(varName, boolValue);
-
     }
-    
-
-
 
 }

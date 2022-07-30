@@ -9,10 +9,11 @@ public class KeyControl : MonoBehaviour
     [SerializeField] List<GameObject> charecters;
     public int Chara;
 
-    private Animator animator;
+    [SerializeField] private Animator animator;
     public PlayerHealth PlayerHealth;
     public PlayerCombat PlayerCombat;
     public PlayerMana PlayerMana;
+    public EffectManager EffectManager;
 
     public Transform target;
 
@@ -21,7 +22,7 @@ public class KeyControl : MonoBehaviour
         PlayerHealth = GetComponent<PlayerHealth>();
         PlayerCombat = GetComponent<PlayerCombat>();
         PlayerMana = GetComponent<PlayerMana>();
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
     }
     void Update()
     {
@@ -48,25 +49,43 @@ public class KeyControl : MonoBehaviour
 
                     animator.SetBool("IsAttecking", true);
                     PlayerCombat.Attack();
-                    transform.LookAt(target);
                     StartCoroutine(AnimationEvents.instance.AnimationEndPoint("IsAttecking", false , "Sword And Shield Attack"));
-                    
+                    //Hit effect is called from an aniamtion event
                     break;
 
                 case 1:
                     animator.SetBool("IsBlocking", true);
-                    transform.LookAt(target);
+                    EffectManager.BlockEffect(true);
+                    //transform.LookAt(target);
                     break;
+
 
                 case 2:
                     animator.SetBool("IsHealing", true);
+                    EffectManager.HealEffect();
                     PlayerHealth.Healing();
                     PlayerMana.ReduceMana();
                     StartCoroutine(AnimationEvents.instance.AnimationEndPoint("IsHealing", false, "Healing"));
                     break;
             }
         }
+
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            switch (Chara)
+            {
+                case 1:
+                animator.SetBool("IsBlocking", false);
+                    EffectManager.BlockEffect(false);
+                    break;
+            }
+            
+        }
     }
+
+           
+
+
 
     void DisableOtherCharecters (int whatToActive)
     {
