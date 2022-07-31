@@ -15,8 +15,6 @@ public class KeyControl : MonoBehaviour
     public PlayerMana PlayerMana;
     public EffectManager EffectManager;
 
-    public Transform target;
-
     private void Start()
     {
         PlayerHealth = GetComponent<PlayerHealth>();

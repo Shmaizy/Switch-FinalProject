@@ -81,7 +81,7 @@ public class EnemyAI : MonoBehaviour
 
     void OnTriggerEnter(Collider col) //zombie attack machenics
     {
-        if (col.gameObject.CompareTag("Player") && Distance < 1)
+        if (col.gameObject.CompareTag("Player") && Distance < 2)
         {
             animator.SetTrigger("Attecking");
         }

@@ -15,7 +15,7 @@ public class PlayerHealth : MonoBehaviour
     public KeyControl script;
     public bool isAlive => currentHealth > 0; //lamda expresion
 
-    private Animator animator;
+    [SerializeField] private Animator animator;
 
     public HealthController healthbar;
     public PlayerMana PlayerMana;
@@ -39,7 +39,7 @@ public class PlayerHealth : MonoBehaviour
                     break;
 
                 case 1: 
-                    if (!Input.GetKeyDown(KeyCode.Space))
+                    if (!Input.GetKey(KeyCode.Space))
                     {
                         TakeDamage();
                     }
@@ -68,8 +68,6 @@ public class PlayerHealth : MonoBehaviour
         {
             animator.SetBool("IsDead", true);
             FindObjectOfType<GameManager>().EndGame();
-
-
         }
 
         else
