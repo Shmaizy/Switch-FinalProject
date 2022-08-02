@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerCombat : MonoBehaviour
 {
-    private Animator animator;
     public Transform attackPoint;
     public float attackRange = 0.5f;
     public LayerMask enemyLayers;
@@ -19,6 +18,7 @@ public class PlayerCombat : MonoBehaviour
         //damage them
         foreach (Collider enemy in hitEnemies)
         {
+           
             enemy.GetComponent<EnemyAI>().TakeDamage(50);
         }  
 
