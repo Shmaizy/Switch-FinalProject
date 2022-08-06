@@ -55,6 +55,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if(currentHealth > 0)
         {
+            //animator.SetBool("IsHit", true);
             currentHealth = currentHealth - damage;
             healthbar.SetHealth(currentHealth);
             Death();
