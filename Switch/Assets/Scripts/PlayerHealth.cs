@@ -15,14 +15,14 @@ public class PlayerHealth : MonoBehaviour
     public KeyControl script;
     public bool isAlive => currentHealth > 0; //lamda expresion
 
-    [SerializeField] private Animator animator;
+    [SerializeField] Animator animator;
 
     public HealthController healthbar;
     public PlayerMana PlayerMana;
 
     void Awake()
     {
-        animator = GetComponent<Animator>();
+        
         PlayerMana = GetComponent<PlayerMana>();
         currentHealth = maxHealth;
         healthbar.SetMaxHealth(maxHealth);
@@ -32,15 +32,19 @@ public class PlayerHealth : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Enemy")) //Player takes damage on collision
         {
-            switch(script.Chara)
+            
+
+            switch (script.Chara)
             {
                 case 0:
+                    
                     TakeDamage();
                     break;
 
                 case 1: 
                     if (!Input.GetKey(KeyCode.Space))
                     {
+                        
                         TakeDamage();
                     }
                     break;
@@ -50,16 +54,21 @@ public class PlayerHealth : MonoBehaviour
                     break;
             }
         }
+
     }
     void TakeDamage()
     {
         if(currentHealth > 0)
         {
-            //animator.SetBool("IsHit", true);
+            animator.SetBool("IsHit", true);
             currentHealth = currentHealth - damage;
             healthbar.SetHealth(currentHealth);
+            StartCoroutine(AnimationEvents.instance.AnimationEndPoint("IsHit", false, "Hit"));
             Death();
         }
+
+
+
 
     }
 
