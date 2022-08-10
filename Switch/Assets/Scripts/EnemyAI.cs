@@ -59,8 +59,8 @@ public class EnemyAI : MonoBehaviour
     public void TakeDamage(int Damage)
     {
         currentHealth -= Damage;
-
         animator.SetTrigger("Hurt");
+        FindObjectOfType<AudioManager>().Play("Zombie Damaged");
 
         if (currentHealth <= 0)
         {
@@ -71,8 +71,8 @@ public class EnemyAI : MonoBehaviour
     void Die()
     {
         Debug.Log("Enemy Died");
-
         animator.SetBool("IsDead", true);
+        FindObjectOfType<AudioManager>().Play("Zombie death");
 
         GetComponent<Collider>().enabled = false;
         this.enabled = false;
@@ -84,6 +84,7 @@ public class EnemyAI : MonoBehaviour
         if (col.gameObject.CompareTag("Player") && Distance < 2)
         {
             animator.SetTrigger("Attecking");
+            FindObjectOfType<AudioManager>().Play("Zombie Attack");
         }
 
     }

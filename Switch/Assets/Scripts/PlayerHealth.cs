@@ -39,6 +39,7 @@ public class PlayerHealth : MonoBehaviour
                 case 0:
                     
                     TakeDamage();
+                    Invulnerability();
                     break;
 
                 case 1: 
@@ -46,11 +47,13 @@ public class PlayerHealth : MonoBehaviour
                     {
                         
                         TakeDamage();
+                        Invulnerability();
                     }
                     break;
 
                 case 2:
                     TakeDamage();
+                    Invulnerability();
                     break;
             }
         }
@@ -61,15 +64,21 @@ public class PlayerHealth : MonoBehaviour
         if(currentHealth > 0)
         {
             animator.SetBool("IsHit", true);
+            FindObjectOfType<AudioManager>().Play("Player damage");
             currentHealth = currentHealth - damage;
             healthbar.SetHealth(currentHealth);
             StartCoroutine(AnimationEvents.instance.AnimationEndPoint("IsHit", false, "Hit"));
             Death();
         }
+    }
 
+    IEnumerator Invulnerability()
+    {
+        Physics2D.IgnoreLayerCollision(6, 7, true);
 
+        yield return new WaitForSeconds(1);
 
-
+        Physics2D.IgnoreLayerCollision(6, 7, false);
     }
 
     void Death()

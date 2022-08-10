@@ -26,16 +26,19 @@ public class KeyControl : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode .Q))
         {
+            FindObjectOfType<AudioManager>().Play("God Swap");
             DisableOtherCharecters(0);
         } //Switchg machenic
 
         if (Input.GetKeyDown(KeyCode.W))
         {
+            FindObjectOfType<AudioManager>().Play("God Swap");
             DisableOtherCharecters(1);
         } //Switchg machenic
 
         if (Input.GetKeyDown(KeyCode.E))
         {
+            FindObjectOfType<AudioManager>().Play("God Swap");
             DisableOtherCharecters(2);
         } //Switchg machenic
         
@@ -48,18 +51,21 @@ public class KeyControl : MonoBehaviour
                     animator.SetBool("IsAttecking", true);
                     PlayerCombat.Attack();
                     StartCoroutine(AnimationEvents.instance.AnimationEndPoint("IsAttecking", false , "Sword And Shield Attack"));
+                    FindObjectOfType<AudioManager>().Play("Attack");
                     //Hit effect is called from an aniamtion event
                     break;
 
                 case 1:
                     animator.SetBool("IsBlocking", true);
+                    FindObjectOfType<AudioManager>().Play("Shield");
                     EffectManager.BlockEffect(true);
                     //transform.LookAt(target);
                     break;
 
-
+                    
                 case 2:
                     animator.SetBool("IsHealing", true);
+                    FindObjectOfType<AudioManager>().Play("Heal");
                     EffectManager.HealEffect();
                     PlayerHealth.Healing();
                     PlayerMana.ReduceMana();
@@ -81,8 +87,6 @@ public class KeyControl : MonoBehaviour
         }
     }
 
-           
-
 
 
     void DisableOtherCharecters (int whatToActive)
@@ -101,6 +105,8 @@ public class KeyControl : MonoBehaviour
             }
         }  
     }
+
+
 
 
 }

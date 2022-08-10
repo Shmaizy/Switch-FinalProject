@@ -8,8 +8,10 @@ public class WinCondition : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Prize"))
         {
+            FindObjectOfType<AudioManager>().Play("LVL Victory");
             Destroy(col.gameObject);
             FindObjectOfType<GameManager>().WinGame();
+            
         }
     }
 }

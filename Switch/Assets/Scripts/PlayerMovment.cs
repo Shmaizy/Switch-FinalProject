@@ -25,7 +25,7 @@ public class PlayerMovment : MonoBehaviour
     void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
-        //animator = GetComponent<Animator>();
+
     }
 
     void Update()
@@ -48,6 +48,7 @@ public class PlayerMovment : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         float VerticalInput = Input.GetAxis("Vertical");
 
+
         movementDirection = new Vector3(VerticalInput, 0, -horizontalInput);
         movementDirection.Normalize();
 
@@ -56,6 +57,7 @@ public class PlayerMovment : MonoBehaviour
         if (movementDirection != Vector3.zero)
         {
             animator.SetBool("IsMoving", true);
+            
             Quaternion toRotation = Quaternion.LookRotation(movementDirection, Vector3.up);
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
             
@@ -92,7 +94,6 @@ public class PlayerMovment : MonoBehaviour
     {
         //applies on RB
          m_Rigidbody.MovePosition(transform.position += movementDirection * Time.deltaTime * Speed);
-        
     }
 }
 

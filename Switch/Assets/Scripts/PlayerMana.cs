@@ -30,6 +30,7 @@ public class PlayerMana : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Mana Potion") && currentMana < 30)
         {
+            FindObjectOfType<AudioManager>().Play("Mana potion");
             currentMana = currentMana + mana;
             manaBar.SetMana(currentMana);
             Destroy(col.gameObject);
