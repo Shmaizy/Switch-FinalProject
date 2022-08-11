@@ -15,12 +15,15 @@ public class KeyControl : MonoBehaviour
     public PlayerMana PlayerMana;
     public EffectManager EffectManager;
 
+    public float attackRate = 2f;
+    float nextAttackTime = 0f;
+
     private void Start()
     {
         PlayerHealth = GetComponent<PlayerHealth>();
         PlayerCombat = GetComponent<PlayerCombat>();
         PlayerMana = GetComponent<PlayerMana>();
-        //animator = GetComponent<Animator>();
+
     }
     void Update()
     {
@@ -48,11 +51,14 @@ public class KeyControl : MonoBehaviour
             {
                 case 0:
 
-                    animator.SetBool("IsAttecking", true);
-                    PlayerCombat.Attack();
-                    StartCoroutine(AnimationEvents.instance.AnimationEndPoint("IsAttecking", false , "Sword And Shield Attack"));
-                    FindObjectOfType<AudioManager>().Play("Attack");
-                    //Hit effect is called from an aniamtion event
+                    if (Time.time >= nextAttackTime)
+                    {
+                        animator.SetBool("IsAttecking", true);
+                        PlayerCombat.Attack();
+                        StartCoroutine(AnimationEvents.instance.AnimationEndPoint("IsAttecking", false, "Sword And Shield Attack"));
+                        FindObjectOfType<AudioManager>().Play("Attack");
+                        //Hit effect is called from an aniamtion event
+                    }
                     break;
 
                 case 1:
